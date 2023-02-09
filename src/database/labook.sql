@@ -57,8 +57,8 @@ DROP TABLE likes_dislikes;
 
  INSERT INTO likes_dislikes (user_id, post_id, like)
  VALUES
- ("U001","P1",5),
+ ("U001","P1",0),
  ("U002","P2",1),
- ("U003","P3",7),
- ("U004","P4",0)
+ ("U003","P3",0),
+ ("U004","P4",1)
 

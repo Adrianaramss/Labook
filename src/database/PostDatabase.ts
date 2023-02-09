@@ -1,4 +1,4 @@
-
+import { Post } from "../models/post";
 import { TPostDB } from "../types";
 import {BaseDatabase} from "../database/BaseDatabase"
 
@@ -23,4 +23,27 @@ export class PostDatabase extends BaseDatabase {
 
         return postsDB
     }
+
+
+    public async findPostById(id: string) {
+        const [ postDB ]: TPostDB[] | undefined[] = await BaseDatabase
+            .connection(PostDatabase.TABLE_POSTS)
+            .where({ id })
+
+        return postDB
+    }
+
+
+    public async insertPost(newPostDB: TPostDB) {
+        await BaseDatabase
+            .connection(PostDatabase.TABLE_POSTS)
+            .insert(newPostDB)
+}
+
+async deletePost(parameter: Post) :Promise<void> {
+    await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
+      .delete()
+      .where({ id: parameter.getId() })
+  }
+
 }
