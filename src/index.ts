@@ -36,6 +36,10 @@ const postController = new PostController()
 
 app.get("/posts",  postController.getPosts)
 
+app.post("/posts", postController.createPosts)
+
+app.delete("/posts/:id", postController.deletePosts)
+
 
 
 
