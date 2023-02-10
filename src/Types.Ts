@@ -21,8 +21,6 @@ export type TPostDB = {
 }
 
 
-
-
 export interface UpdatedPost {
     content: string,
     likes: number,
