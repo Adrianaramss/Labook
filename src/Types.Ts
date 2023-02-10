@@ -19,3 +19,14 @@ export type TPostDB = {
     created_at: string,
     updated_at: string,
 }
+
+
+
+
+export interface UpdatedPost {
+    content: string,
+    likes: number,
+    dislikes: number
+}
+
+

@@ -1,6 +1,7 @@
 import { Request,Response } from "express"
 import { PostDatabase} from "../database/PostDatabase"
 import { Post } from "../models/post"
+import { TPostDB, UpdatedPost } from "../types"
 
 export class PostController {
 public getPosts =  async (req: Request, res: Response) => {
@@ -107,7 +108,7 @@ public createPosts = async (req: Request, res: Response) => {
             // await db("posts").insert(newPostDB)
             await postDatabase.insertPost(newPostDB)
 
-            res.status(201).send("postagem realizada com sucesso")
+            res.status(201).send(content)
         } catch (error) {
             console.log(error)
     
@@ -170,4 +171,90 @@ public createPosts = async (req: Request, res: Response) => {
         }
       }
     
+
+     
+    public updatePosts = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params
+
+            const { content, likes, dislikes, updatedAt } = req.body 
+    
+            const postDatabase = new PostDatabase()
+    
+            if (id !== undefined) {
+                if (typeof id !== "string") {
+                  res.status(400)
+                  throw new Error("'id' deve ser string")
+                }
+              }
+    
+            const post = await postDatabase.findPostById(id)
+    
+            if (!post) {
+                res.status(404)
+                throw new Error("post não encontrado")
+            }
+
+            const newPost = new Post(
+                post.id,
+                post.creator_id,
+                content || post.content,
+                likes || post.likes,
+                dislikes || post.dislikes,
+                post.created_at,
+                updatedAt || post.updated_at
+            )
+    
+            if (content !== undefined) {
+                if (typeof content !== "string") {
+                    res.status(400);
+                    throw new Error("'content' deve ser string");
+                }
+                newPost.setContent(content)
+                newPost.setUpdatedAt(new Date().toISOString())
+            }
+    
+                if( likes !== undefined) {
+                    if (typeof likes !== "number") {
+                        res.status(400)
+                        throw new Error("'likes' deve ser number")
+                    }
+                    newPost.setLikes(likes)
+                    newPost.setUpdatedAt(new Date().toISOString())
+                }
+           
+                if(dislikes !== undefined) {
+                    if (typeof dislikes !== "number") {
+                        res.status(400)
+                        throw new Error("'dislikes' deve ser number")
+                    }
+                    newPost.setDislikes(dislikes)
+                    newPost.setUpdatedAt(new Date().toISOString())
+                }
+           
+                const newPostDB: UpdatedPost = {
+                    content: newPost.getContent(),
+                    likes: newPost.getLikes(),
+                    dislikes: newPost.getDislikes(),
+                }
+        
+                postDatabase.updatePosts(newPostDB, id)
+        
+                res.status(200).send({ newPostDB })
+        
+    
+        } catch (error) {
+            console.log(error)
+    
+            if (req.statusCode === 200) {
+                res.status(500)
+            }
+    
+            if (error instanceof Error) {
+                res.send(error.message)
+            } else {
+                res.send("Erro inesperado")
+            }
+        }
+    }
 }

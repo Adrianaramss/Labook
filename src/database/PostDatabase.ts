@@ -1,5 +1,5 @@
 import { Post } from "../models/post";
-import { TPostDB } from "../types";
+import { TPostDB, UpdatedPost } from "../types";
 import {BaseDatabase} from "../database/BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -45,5 +45,12 @@ async deletePost(parameter: Post) :Promise<void> {
       .delete()
       .where({ id: parameter.getId() })
   }
+  
+
+  public async updatePosts(newPostDB: UpdatedPost, id: string): Promise<void> {
+    await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
+        .update(newPostDB)
+        .where({ id })
+}
 
 }
