@@ -41,6 +41,7 @@ app.post("/posts", postController.createPosts)
 app.delete("/posts/:id", postController.deletePosts)
 
 
+app.put("/posts/:id", postController.updatePosts)
 
 
 // app.get("/posts", async (req: Request, res: Response) => {
