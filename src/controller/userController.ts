@@ -2,7 +2,6 @@ import { Request,Response } from "express"
 import { UserDatabase } from "../database/UserDatabase"
 import { User } from "../models/User"
 import { UserDB } from "../types"
-import { BaseDatabase } from "../database/BaseDatabase"
 
 export class UserController {
 
@@ -82,7 +81,7 @@ public createUser = async (req: Request, res: Response) => {
             password,
             role,
             new Date().toISOString()
-        ) // yyyy-mm-ddThh:mm:sssZ
+        ) 
 
         const newUserDB: UserDB = {
             id: newUser.getId(),

@@ -4,6 +4,9 @@ import cors from 'cors'
 // import { TPostDB} from './Types'
 import { PostController } from './controller/Postcontroller'
 import { UserController } from './controller/userController'
+import { userRouter } from './Router/userRouter'
+import { postRouter } from './Router/postRouter'
+
 
 const app = express()
 
@@ -33,19 +36,20 @@ app.get("/ping", async (req: Request, res: Response) => {
 })
 ///========================endpoints========================///
 
-const postController = new PostController()
-const userController = new UserController()
+// const postController = new PostController()
+// // const userController = new UserController()
 
-app.get("/posts",  postController.getPosts)
+// app.get("/posts",  postController.getPosts)
 
-app.post("/posts", postController.createPosts)
+// app.post("/posts", postController.createPosts)
 
-app.delete("/posts/:id", postController.deletePosts)
+// app.delete("/posts/:id", postController.deletePosts)
 
-app.put("/posts/:id", postController.updatePosts)
+// app.put("/posts/:id", postController.updatePosts)
 
-app.get("/users", userController.getUsers)
+// app.get("/users", userController.getUsers)
 
-app.post("/users", userController.createUser)
+// app.post("/users", userController.createUser)
 
-
+app.use("/users", userRouter)
+app.use("/posts", postRouter )
