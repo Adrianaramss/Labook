@@ -9,7 +9,7 @@ export type TUserDB = {
 }
 
 
-export type TPostDB = {
+export type PostDB = {
     id: string,
     creator_id: string,
     content: string,

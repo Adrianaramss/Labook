@@ -1,5 +1,5 @@
 import { Post } from "../models/post";
-import { TPostDB, UpdatedPost } from "../types";
+import { PostDB, UpdatedPost } from "../types";
 import { BaseDatabase } from "../database/BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -9,13 +9,13 @@ export class PostDatabase extends BaseDatabase {
         let postsDB
 
         if (q) {
-            const result: TPostDB[] = await BaseDatabase
+            const result: PostDB[] = await BaseDatabase
                 .connection(PostDatabase.TABLE_POSTS)
                 .where("content", "LIKE", `%${q}%`)
 
             postsDB = result
         } else {
-            const result: TPostDB[] = await BaseDatabase
+            const result: PostDB[] = await BaseDatabase
                 .connection(PostDatabase.TABLE_POSTS)
 
             postsDB = result
@@ -26,7 +26,7 @@ export class PostDatabase extends BaseDatabase {
 
 
     public async findPostById(id: string) {
-        const [postDB]: TPostDB[] | undefined[] = await BaseDatabase
+        const [postDB]: PostDB[] | undefined[] = await BaseDatabase
             .connection(PostDatabase.TABLE_POSTS)
             .where({ id })
 
@@ -34,18 +34,18 @@ export class PostDatabase extends BaseDatabase {
     }
 
 
-    public async insertPost(newPostDB: TPostDB) {
+    public async insertPost(newPostDB: PostDB) {
         await BaseDatabase
             .connection(PostDatabase.TABLE_POSTS)
             .insert(newPostDB)
     }
 
-    async deletePost(parameter: Post): Promise<void> {
-        await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
-            .delete()
-            .where({ id: parameter.getId() })
+    public async deletePost(id: string): Promise<void> {
+        await BaseDatabase
+            .connection(PostDatabase.TABLE_POSTS)
+            .del()
+            .where({ id })
     }
-
 
     public async updatePosts(newPostDB: UpdatedPost, id: string): Promise<void> {
         await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
