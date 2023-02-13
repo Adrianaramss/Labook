@@ -1,4 +1,5 @@
 import { PostDatabase } from "../database/PostDatabase"
+import { BadRequestError } from "../errors/BadRequestError"
 import { Post } from "../models/post"
 import { PostDB } from "../types"
 
@@ -26,23 +27,23 @@ export class PostBusiness {
             const { id, creatorId, content, likes, dislikes } = input
 
             if (typeof id !== "string") {
-                throw new Error("'id' deve ser string")
+                throw new BadRequestError("'id' deve ser string")
             }
 
             if (typeof creatorId !== "string") {
-                throw new Error("'creatorId' deve ser string")
+                throw new BadRequestError("'creatorId' deve ser string")
             }
 
             if (typeof content !== "string") {
-                throw new Error("'content' deve ser string")
+                throw new BadRequestError("'content' deve ser string")
             }
 
             if (typeof likes !== "number") {
-                throw new Error("'likes' deve ser number")
+                throw new BadRequestError("'likes' deve ser number")
             }
 
             if (typeof dislikes !== "number") {
-                throw new Error("'dislikes' deve ser bolean")
+                throw new BadRequestError("'dislikes' deve ser bolean")
             }
 
          
@@ -50,7 +51,7 @@ export class PostBusiness {
             const userDBExists = await postDatabase.findPostById(id)
 
             if (userDBExists) {
-                throw new Error("'id' já existe")
+                throw new BadRequestError("'id' já existe")
             }
 
             const newPost = new Post(
@@ -94,7 +95,7 @@ export class PostBusiness {
     
                 const postExist = await postDBInstance.findPostById(id)
                 if (!postExist) {
-                    throw new Error("'id' não encontrado ")
+                    throw new BadRequestError("'id' não encontrado ")
                 }
                 // const deletePost = new Post(
                 //     postExist.id,
@@ -126,14 +127,14 @@ export class PostBusiness {
         
                     if (id !== undefined) {
                         if (typeof id !== "string") {
-                            throw new Error("'id' deve ser string")
+                            throw new BadRequestError("'id' deve ser string")
                         }
                     }
         
                     const postExist = await postDatabase.findPostById(id)
         
                     if (!postExist) {
-                        throw new Error("post não encontrado")
+                        throw new BadRequestError("post não encontrado")
                     }
         
                     const newPost = new Post(
@@ -148,7 +149,7 @@ export class PostBusiness {
         
                     if (content !== undefined) {
                         if (typeof content !== "string") {
-                            throw new Error("'content' deve ser string");
+                            throw new BadRequestError("'content' deve ser string");
                         }
                         newPost.setContent(content)
                         newPost.setUpdatedAt(new Date().toISOString())
@@ -156,7 +157,7 @@ export class PostBusiness {
         
                     if (likes !== undefined) {
                         if (typeof likes !== "number") {
-                            throw new Error("'likes' deve ser number")
+                            throw new BadRequestError("'likes' deve ser number")
                         }
                         newPost.setLikes(likes)
                         newPost.setUpdatedAt(new Date().toISOString())
@@ -164,7 +165,7 @@ export class PostBusiness {
         
                     if (dislikes !== undefined) {
                         if (typeof dislikes !== "number") {
-                            throw new Error("'dislikes' deve ser number")
+                            throw new BadRequestError("'dislikes' deve ser number")
                         }
                         newPost.setDislikes(dislikes)
                         newPost.setUpdatedAt(new Date().toISOString())

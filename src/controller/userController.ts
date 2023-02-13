@@ -1,6 +1,7 @@
 import { Request,Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
 import { UserDatabase } from "../database/UserDatabase"
+import { BaseError } from "../errors/BaseError"
 import { User } from "../models/User"
 import { UserDB } from "../types"
 
@@ -27,12 +28,13 @@ public getUsers = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error)
 
-        if (req.statusCode === 200) {
-            res.status(500)
-        }
+        // if (req.statusCode === 200) {
+        //     res.status(500)
+        // }
 
-        if (error instanceof Error) {
-            res.send(error.message)
+        if (error instanceof BaseError) {
+            res.status(error.statusCode).send(error.message)
+
         } else {
             res.send("Erro inesperado")
         }
@@ -55,12 +57,13 @@ public createUser = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error)
 
-        if (req.statusCode === 200) {
-            res.status(500)
-        }
+        // if (req.statusCode === 200) {
+        //     res.status(500)
+        // }
 
-        if (error instanceof Error) {
-            res.send(error.message)
+        if (error instanceof BaseError) {
+            res.status(error.statusCode).send(error.message)
+
         } else {
             res.send("Erro inesperado")
         }
