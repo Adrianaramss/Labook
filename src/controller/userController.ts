@@ -1,4 +1,5 @@
 import { Request,Response } from "express"
+import { UserBusiness } from "../business/UserBusiness"
 import { UserDatabase } from "../database/UserDatabase"
 import { User } from "../models/User"
 import { UserDB } from "../types"
@@ -13,16 +14,16 @@ public getUsers = async (req: Request, res: Response) => {
         const userDatabase = new UserDatabase()
         const usersDB = await userDatabase.findUsers(q)
 
-        const users: User[] = usersDB.map((userDB) => new User(
-            userDB.id,
-            userDB.name,
-            userDB.email,
-            userDB.password,
-            userDB.role,
-            userDB.created_at
-        ))
+        // const users: User[] = usersDB.map((userDB) => new User(
+        //     userDB.id,
+        //     userDB.name,
+        //     userDB.email,
+        //     userDB.password,
+        //     userDB.role,
+        //     userDB.created_at
+        // ))
 
-        res.status(200).send({message: "usuario encontrado" ,users})
+        res.status(200).send(usersDB)
     } catch (error) {
         console.log(error)
 
@@ -38,63 +39,19 @@ public getUsers = async (req: Request, res: Response) => {
     }
 }
 public createUser = async (req: Request, res: Response) => {
-
     try {
-        const { id, name, email, password,role } = req.body
-
-        if (typeof id !== "string") {
-            res.status(400)
-            throw new Error("'id' deve ser string")
+        const input = {
+            id: req.body.id,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role
         }
 
-        if (typeof name !== "string") {
-            res.status(400)
-            throw new Error("'name' deve ser string")
-        }
+        const userBusiness = new UserBusiness()
+        const output = await userBusiness.createUser(input)
 
-        if (typeof email !== "string") {
-            res.status(400)
-            throw new Error("'email' deve ser string")
-        }
-
-        if (typeof password !== "string") {
-            res.status(400)
-            throw new Error("'password' deve ser string")
-        }
-        if (typeof role !== "string") {
-            res.status(400)
-            throw new Error("'role' deve ser string")
-        }
-
-        const userDatabase = new UserDatabase()
-        const userDBExists = await userDatabase.findUserById(id)
-
-        if (userDBExists) {
-            res.status(400)
-            throw new Error("'id' já existe")
-        }
-
-        const newUser = new User(
-            id,
-            name,
-            email,
-            password,
-            role,
-            new Date().toISOString()
-        ) 
-
-        const newUserDB: UserDB = {
-            id: newUser.getId(),
-            name: newUser.getName(),
-            email: newUser.getEmail(),
-            password: newUser.getPassword(),
-            role: newUser.getRole(),
-            created_at: newUser.getCreatedAt()
-        }
-
-        await userDatabase.insertUser(newUserDB)
-
-        res.status(201).send({message:"usuario criado com sucesso",newUser})
+        res.status(201).send(output)
     } catch (error) {
         console.log(error)
 
@@ -109,9 +66,6 @@ public createUser = async (req: Request, res: Response) => {
         }
     }
 }
-
-
-
 
 
 }
