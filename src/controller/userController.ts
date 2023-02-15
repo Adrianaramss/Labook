@@ -6,7 +6,9 @@ import { User } from "../models/User"
 import { UserDB } from "../types"
 
 export class UserController {
-
+constructor (
+    private userBusiness: UserBusiness
+){}
 public getUsers = async (req: Request, res: Response) => {
 
     try {
