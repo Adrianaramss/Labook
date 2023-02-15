@@ -2,13 +2,17 @@ import { PostDatabase } from "../database/PostDatabase"
 import { BadRequestError } from "../errors/BadRequestError"
 import { Post } from "../models/post"
 import { PostDB } from "../types"
-
+import {EditPostInputDTO, PostDTO} from "../dtos/PostDTO"
+import { CreatePostInputDTO } from "../dtos/PostDTO"
 
 export class PostBusiness {
-    public getPosts = async (q: string | undefined) => {
-            const postDatabase = new PostDatabase()
-            const postsDB = await postDatabase.findPosts(q)
+    findPosts: any
+    constructor (
+        private postDatabase: PostDatabase
+    ){}
 
+    public getPosts = async (q: string | undefined) => {
+            const postsDB = await this.postDatabase.getPosts(q)
 
             const posts: Post[] = postsDB.map((postDB) => new Post(
                 postDB.id,
@@ -22,33 +26,12 @@ export class PostBusiness {
         return posts
     }
 
-    public createPosts = async (input:any) => {
+    public createPosts = async (input:CreatePostInputDTO) => {
        
-            const { id, creatorId, content, likes, dislikes } = input
+            const { id, creator_id, content, likes, dislikes } = input
 
-            if (typeof id !== "string") {
-                throw new BadRequestError("'id' deve ser string")
-            }
-
-            if (typeof creatorId !== "string") {
-                throw new BadRequestError("'creatorId' deve ser string")
-            }
-
-            if (typeof content !== "string") {
-                throw new BadRequestError("'content' deve ser string")
-            }
-
-            if (typeof likes !== "number") {
-                throw new BadRequestError("'likes' deve ser number")
-            }
-
-            if (typeof dislikes !== "number") {
-                throw new BadRequestError("'dislikes' deve ser bolean")
-            }
-
-         
-            const postDatabase = new PostDatabase()
-            const userDBExists = await postDatabase.findPostById(id)
+        
+            const userDBExists = await this.postDatabase.findPostById(id)
 
             if (userDBExists) {
                 throw new BadRequestError("'id' já existe")
@@ -56,7 +39,7 @@ export class PostBusiness {
 
             const newPost = new Post(
                 id,
-                creatorId,
+                creator_id,
                 content,
                 likes,
                 dislikes,
@@ -74,8 +57,7 @@ export class PostBusiness {
                 updated_at: newPost.getUpdatedAt()
             }
 
-            // await db("posts").insert(newPostDB)
-            await postDatabase.insertPost(newPostDB)
+            await this.postDatabase.insertPost(newPostDB)
 
     
             const output = {
@@ -97,17 +79,7 @@ export class PostBusiness {
                 if (!postExist) {
                     throw new BadRequestError("'id' não encontrado ")
                 }
-                // const deletePost = new Post(
-                //     postExist.id,
-                //     postExist.creator_id,
-                //     postExist.content,
-                //     postExist.likes,
-                //     postExist.dislikes,
-                //     postExist.created_at,
-                //     postExist.updated_at,
-    
-    
-                // )
+            
     
                 await postDBInstance.deletePost(id)
     
@@ -118,20 +90,19 @@ export class PostBusiness {
                 return outPut
             }
 
-            public updatePosts = async (input:any) => {
+            public updatePosts = async (input:EditPostInputDTO) => {
              
         
-                    const {id, content, likes,dislikes } = input
+                    const {idToEdit, content, likes,dislikes } = input
         
-                    const postDatabase = new PostDatabase()
         
-                    if (id !== undefined) {
-                        if (typeof id !== "string") {
+                    if (idToEdit !== undefined) {
+                        if (typeof idToEdit !== "string") {
                             throw new BadRequestError("'id' deve ser string")
                         }
                     }
         
-                    const postExist = await postDatabase.findPostById(id)
+                    const postExist = await this.postDatabase.findPostById(idToEdit)
         
                     if (!postExist) {
                         throw new BadRequestError("post não encontrado")
@@ -181,9 +152,9 @@ export class PostBusiness {
                         updated_at: newPost.getUpdatedAt()
                     }
         
-                 await   postDatabase.updatePosts(newPostDB, id)
+                 await this.postDatabase.updatePosts(newPostDB, idToEdit)
         
-        
+                 
                  const outPut = {
                     message: "Postagem atualizada",
                     post: newPost

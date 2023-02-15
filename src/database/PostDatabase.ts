@@ -5,7 +5,7 @@ import { BaseDatabase } from "../database/BaseDatabase"
 export class PostDatabase extends BaseDatabase {
     public static TABLE_POSTS = "posts"
 
-    public async findPosts(q: string | undefined) {
+    public async getPosts(q: string | undefined) {
         let postsDB
 
         if (q) {
