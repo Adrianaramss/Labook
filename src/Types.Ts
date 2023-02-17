@@ -49,3 +49,14 @@ export interface UserModel {
     role: USER_ROLES,
     createdAt: string
 }
+
+
+export interface PostModel {
+    id: string,
+    creatorId: string,
+    content: string,
+    likes: number,
+    dislikes: number,
+    createdAt: string,
+    updatedAt: string
+}
