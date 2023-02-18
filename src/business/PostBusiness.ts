@@ -116,10 +116,10 @@ export class PostBusiness {
     public editPost = async (
         input: EditPostInputDTO
     ): Promise<void> => {
+
         const {idToEdit, token, content } = input
 
-      
-
+    
         if (typeof token !== "string"){
             throw new BadRequestError("'token' inválido")
         }
@@ -148,7 +148,6 @@ export class PostBusiness {
         }
 
         const creatorName = payload.name
-
 
         const post = new Post(
         postDB.id,

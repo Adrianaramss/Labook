@@ -62,6 +62,26 @@ DROP TABLE likes_dislikes;
  ("U003","P3",0),
  ("U004","P4",1);
 
+
+UPDATE posts
+SET LIKES = 1
+WHERE id = "P2";
+
+UPDATE posts
+SET LIKES = 1
+WHERE id = "P4";
+
+UPDATE posts
+SET dislikes = 1
+WHERE id = "P1";
+
+UPDATE posts
+SET dislikes = 1
+WHERE id = "P3";
+
+
+
+
 SELECT 
 posts.id,
 posts.creator_id,

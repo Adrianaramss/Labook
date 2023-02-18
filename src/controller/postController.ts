@@ -15,7 +15,7 @@ export class PostController {
   ){}
 
   public getPosts = async (req: Request, res: Response) => {
-      try {
+    try {
           const input: GetPostsInput = {
               q: req.query.q as string,
               token: req.headers.authorization
@@ -60,15 +60,15 @@ export class PostController {
 }
 
 
-
 public editPost = async (req: Request, res: Response) => {
     try {
         const input: EditPostInputDTO = {
             idToEdit: req.params.id,
             content: req.body.content,
             token: req.headers.authorization
+
         }
-   await this.postBusiness.editPost(input)
+        await this.postBusiness.editPost(input)
 
         res.status(201).end()
     } catch (error) {

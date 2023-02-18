@@ -46,12 +46,13 @@ export class PostDatabase extends BaseDatabase {
     }
 
     public update = async (
-        id: string,
+        idToEdit: string,
         postDB: PostDB
     ): Promise<void> => {
+        // console.log(postDB)
         await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
             .update(postDB)
-            .where({ id })
+            .where({ id : idToEdit })
     }
 
 
