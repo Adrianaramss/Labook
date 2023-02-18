@@ -60,5 +60,20 @@ DROP TABLE likes_dislikes;
  ("U001","P1",0),
  ("U002","P2",1),
  ("U003","P3",0),
- ("U004","P4",1)
+ ("U004","P4",1);
+
+SELECT 
+posts.id,
+posts.creator_id,
+posts.content,
+posts.like,
+posts.dislike,
+posts.created_at,
+posts.updated_at,
+users.name AS creator_name
+FROM posts
+JOIN users
+ON posts.creator_id = user_id;
+
+SELECT FROM posts;
 
