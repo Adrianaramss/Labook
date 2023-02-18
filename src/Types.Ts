@@ -13,14 +13,15 @@ export enum USER_ROLES {
     ADMIN = "ADMIN"
 }
 
+
 export type PostDB = {
     id: string,
-    creator_id: string,
     content: string,
     likes: number,
     dislikes: number,
     created_at: string,
     updated_at: string,
+    creator_id: string,
 }
 
 
@@ -53,10 +54,18 @@ export interface UserModel {
 
 export interface PostModel {
     id: string,
-    creatorId: string,
     content: string,
     likes: number,
     dislikes: number,
     createdAt: string,
     updatedAt: string
+    creator: {
+        id: string,
+        name: string
+    }
 }
+
+export interface PostCreatorDB extends PostDB {
+    creator_name: string
+}
+
