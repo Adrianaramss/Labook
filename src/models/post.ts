@@ -12,68 +12,58 @@ export class Post {
         private creatorName: string,
     ) { }
 
-    public getId(): string {
+   
+    getId(): string{
         return this.id
     }
 
-
-    public getContent(): string {
-        return this.content
-    }
-
-    public setContent(newContent: string): void {
-        this.content = newContent
-    }
-
-    public getLikes(): number {
-        return this.likes
-    }
-
-    public setLikes(newLikes: number): void {
-        this.likes = newLikes
-    }
-
-    public getDislikes(): number {
-        return this.dislikes
-    }
-
-    public setDislikes(newDislikes: number): void {
-        this.dislikes = newDislikes
-    }
-
-    public getCreatedAt(): string {
-        return this.createdAt
-    }
-
-    public setCreatedAt(newCreatedAt: string): void {
-        this.createdAt = newCreatedAt
-    }
-
-    public getUpdatedAt(): string {
-        return this.updatedAt
-    }
-
-    public setUpdatedAt(newUpdatedAt: string): void {
-        this.updatedAt = newUpdatedAt
-    }
-
-    public getCreatorId(): string {
+    getCreatorId(): string{
         return this.creatorId
     }
 
-    public setCreatorId(value: string): void {
+    setCreatorId(value: string): void{
         this.creatorId = value
     }
 
-    public getCreatorName(): string {
-        return this.creatorName
+    getContent(): string{
+        return this.content
     }
 
-    public setCreatorName(value: string): void {
-        this.creatorName = value
+    setContent(value: string): void{
+        this.content = value
     }
 
+    getLikes(): number{
+        return this.likes
+    }
 
+    setLikes(value: number): void{
+        this.likes = value
+    }
+
+    getDislikes(): number{
+        return this.dislikes
+    }
+
+    setDislikes(value: number): void{
+        this.dislikes = value
+    }
+
+    getCreatedAt(): string{
+        return this.createdAt
+    }
+
+    setCreatedAt(value: string){
+        this.createdAt = value
+    }
+
+    getUpdatedAt(): string{
+        return this.updatedAt
+    }
+
+    setUpdatedAt(value: string): void{
+        this.updatedAt = value
+    }
 
 
     public toBusinessModel(): PostModel {

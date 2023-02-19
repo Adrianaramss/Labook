@@ -1,15 +1,12 @@
 import { PostDatabase } from "../database/PostDatabase"
 import { BadRequestError } from "../errors/BadRequestError"
 import { Post } from "../models/post"
-import { PostCreatorDB, PostDB } from "../types"
-// import {EditPostInputDTO, PostDTO} from "../dtos/PostDTO"
-// import { CreatePostInputDTO } from "../dtos/PostDTO"
+import { PostCreatorDB } from "../types"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
 import { EditPostInputDTO, GetPostsInput } from "../dtos/PostDTO"
 import { GetPostsOutput } from "../dtos/PostDTO"
 import { CreatePostInputDTO } from "../dtos/PostDTO"
-import { CreatePostOutput } from "../dtos/PostDTO"
 import { DeletePostInputDTO } from "../dtos/PostDTO"
 import { USER_ROLES } from "../types"
 import { NotFoundError } from "../errors/NotFoundErro"
@@ -19,16 +16,14 @@ export class PostBusiness {
     constructor (
         private postDatabase: PostDatabase,
         private idGenerator: IdGenerator,
-        private tokenManager: TokenManager
+        private tokenManager: TokenManager,
     ){}
     public getPosts = async (
         input: GetPostsInput
         ): Promise<GetPostsOutput> => {
-        const { q, token } = input
+        const {  token } = input
 
-        if (typeof q !== "string" && q !== undefined) {
-            throw new BadRequestError("'q' deve ser string ou undefined")
-        }
+       
 
         if (typeof token !== "string"){
             throw new BadRequestError("'token' inválido")
@@ -111,8 +106,6 @@ export class PostBusiness {
       
     }
 
-
-
     public editPost = async (
         input: EditPostInputDTO
     ): Promise<void> => {
@@ -172,6 +165,9 @@ export class PostBusiness {
 
 
 
+
+    
+
     public deletePost = async (
         input: DeletePostInputDTO
     ): Promise<void> => {
@@ -204,7 +200,5 @@ export class PostBusiness {
 
         await this.postDatabase.delete(idToDelete)
     }
-
-
 
 }

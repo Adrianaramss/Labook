@@ -24,6 +24,7 @@ export class PostDatabase extends BaseDatabase {
         return result
     }
 
+   
     public insert = async (postDB: PostDB): Promise<void> => {
         await BaseDatabase
             .connection(PostDatabase.TABLE_POSTS)
@@ -54,13 +55,4 @@ export class PostDatabase extends BaseDatabase {
             .update(postDB)
             .where({ id : idToEdit })
     }
-
-
-
-
-
-
-
-
-
 }

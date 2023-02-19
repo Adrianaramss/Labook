@@ -17,7 +17,6 @@ export class PostController {
   public getPosts = async (req: Request, res: Response) => {
     try {
           const input: GetPostsInput = {
-              q: req.query.q as string,
               token: req.headers.authorization
           }
 
@@ -58,28 +57,29 @@ export class PostController {
         }
     }
 }
+   public editPost = async (req: Request, res: Response) => {
+        try {
 
+            const input: EditPostInputDTO = {
+                idToEdit: req.params.id,
+                content: req.body.content,
+                token: req.headers.authorization
+            }
 
-public editPost = async (req: Request, res: Response) => {
-    try {
-        const input: EditPostInputDTO = {
-            idToEdit: req.params.id,
-            content: req.body.content,
-            token: req.headers.authorization
+            await this.postBusiness.editPost(input)
 
-        }
-        await this.postBusiness.editPost(input)
+            res.status(200).end()
 
-        res.status(201).end()
-    } catch (error) {
-        console.log(error)
-        if (error instanceof BaseError) {
-            res.status(error.statusCode).send(error.message)
-        } else {
-            res.status(500).send("Erro inesperado")
+        } catch (error) {
+            console.log(error)
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message)
+            } else {
+                res.status(500).send("Erro inesperado")
+            }
         }
     }
-}
+
 
 
 public deletePost = async (req: Request, res: Response) => {
