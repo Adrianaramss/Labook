@@ -1,1 +1,36 @@
-# Labook
+# Projeto Labook
+
+O Projeto  Labook é uma rede social com o objetivo de promover a conexão e interação entre pessoas. Quem se cadastrar no aplicativo poderá criar e curtir publicações.
+
+# Contéudo abordados
+- NodeJS
+- Typescript
+- Express
+- SQL e SQLite
+- Knex
+- POO
+- Arquitetura em camadas
+- Geração de UUID
+- Geração de hashes
+- Autenticação e autorização
+- Roteamento
+- Postman
+
+# Diagrama do Banco de dados
+![diagrama](https://user-images.githubusercontent.com/111310311/219969478-ac3753ae-763a-4a79-a75d-bde87f218365.png)
+
+
+# 
+
+# Endpoints 
+- Get all Post - Endpoint que exibi todos as postagens da rede social,
+- Get all Users - Endpoint que exibi todos os usuarios que utilizam a rede social,
+- Signup - Endpoint onde o usuario faz seu cadastro, 
+- Login - Endpoint  onde o usuario faz o login,
+- Create Post - Endpoint que cria uma postagem, 
+- Edit Post - Endpoint onde o usuario pode editar sua postagem,
+- Delete Post - Endpoint que deleta a postagem 
+
+ 
+ # Documentação API
+https://documenter.getpostman.com/view/24460801/2s93CHvFGj
