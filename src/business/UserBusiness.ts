@@ -44,9 +44,7 @@ export class UserBusiness {
     public signup = async (input: SignupInput): Promise<SignupOutput> => {
         const { name, email, password } = input
 
-        // if (typeof id !== "string") {
-        //     throw new BadRequestError("'id' deve ser string")
-        // }
+      
 
         if (typeof name !== "string") {
             throw new BadRequestError("'name' deve ser string")
@@ -62,18 +60,14 @@ export class UserBusiness {
 
         const id = this.idGenerator.generate()
         
-        // const userDBExists = await this.userDatabase.findUserById(id)
-
-        // if (userDBExists) {
-        //     throw new BadRequestError("'id' já existe")
-        // }
+      
 
         const newUser = new User(
             id,
             name,
             email,
             password,
-            USER_ROLES.NORMAL, // só é possível criar users com contas normais
+            USER_ROLES.NORMAL, 
             new Date().toISOString()
         )
 
