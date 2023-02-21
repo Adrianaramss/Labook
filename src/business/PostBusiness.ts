@@ -208,19 +208,10 @@ export class PostBusiness {
         if (token === undefined) {
             throw new BadRequestError("'token' ausente")
         }
-
-        if (typeof token !== "string") {
-            throw new BadRequestError("'token' deve ser uma string")
-        }
-
-        if (token === null) {
-            throw new BadRequestError("'token' deve ser informado")
-        }
-
         const payload = this.tokenManager.getPayload(token)
 
         if (payload === null) {
-            throw new BadRequestError("token não é valido")
+            throw new BadRequestError("token inválido")
         }
 
         if (typeof like !== "boolean") {
