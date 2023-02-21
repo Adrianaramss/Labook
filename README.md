@@ -24,13 +24,13 @@ O Projeto  Labook é uma rede social com o objetivo de promover a conexão e int
 
 # Endpoints 
 - Get all Post - Endpoint que exibi todos as postagens da rede social,
-- Get all Users - Endpoint que exibi todos os usuarios que utilizam a rede social,
-- Signup - Endpoint onde o usuario faz seu cadastro, 
-- Login - Endpoint  onde o usuario faz o login,
+- Get all Users - Endpoint que exibi todos os usuários que utilizam a rede social,
+- Signup - Endpoint onde o usuário faz seu cadastro, 
+- Login - Endpoint  onde o usuário faz o login,
 - Create Post - Endpoint que cria uma postagem, 
-- Edit Post - Endpoint onde o usuario pode editar sua postagem,
+- Edit Post - Endpoint onde o usuário pode editar sua postagem,
 - Delete Post - Endpoint que deleta a postagem 
-- Like / Dislike Post - Endpoint onde o usuario pode interagir com  outros membros da rede social como curtir e descurtir uma postagem.
+- Like / Dislike Post - Endpoint onde o usuário pode interagir com  outros membros da rede social como curtir e descurtir uma postagem.
  
  # Documentação API
 https://documenter.getpostman.com/view/24460801/2s93CHvFGj
