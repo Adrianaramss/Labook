@@ -13,56 +13,80 @@ export class Post {
     ) { }
 
    
-    getId(): string{
+    public getId(): string{
         return this.id
     }
 
-    getCreatorId(): string{
-        return this.creatorId
-    }
-
-    setCreatorId(value: string): void{
-        this.creatorId = value
-    }
-
-    getContent(): string{
+    public getContent(): string{
         return this.content
     }
 
-    setContent(value: string): void{
+    public setContent(value: string): void{
         this.content = value
     }
 
-    getLikes(): number{
+    public getLikes(): number{
         return this.likes
     }
 
-    setLikes(value: number): void{
+    public setLikes(value: number): void{
         this.likes = value
     }
+    
+    public addLike(){
+        this.likes += 1
+    }
 
-    getDislikes(): number{
+    public removeLike(){
+        this.likes -= 1
+    }
+
+    public addDislike(){
+        this.dislikes += 1
+    }
+
+    public removeDislike(){
+        this.dislikes -= 1
+    }
+
+    public getDislikes(): number{
         return this.dislikes
     }
 
-    setDislikes(value: number): void{
+    public setDislikes(value: number): void{
         this.dislikes = value
     }
 
-    getCreatedAt(): string{
+    public getCreatedAt(): string{
         return this.createdAt
     }
 
-    setCreatedAt(value: string){
+    public setCreatedAt(value: string){
         this.createdAt = value
     }
 
-    getUpdatedAt(): string{
+    public getUpdatedAt(): string{
         return this.updatedAt
     }
 
-    setUpdatedAt(value: string): void{
+    public setUpdatedAt(value: string): void{
         this.updatedAt = value
+    }
+
+    public getCreatorId(): string {
+        return this.creatorId
+    }
+
+    public setCreatorId(value: string): void {
+        this.creatorId = value
+    }
+
+    public getCreatorName(): string {
+        return this.creatorName
+    }
+
+    public setCreatorName(value: string): void {
+        this.creatorName = value
     }
 
 

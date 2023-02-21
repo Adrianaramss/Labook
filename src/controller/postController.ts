@@ -1,12 +1,9 @@
 import { Request, Response } from "express"
-import { PostDatabase } from "../database/PostDatabase"
-import { Post } from "../models/post"
-import {  UpdatedPost } from "../types"
 import {PostBusiness} from "../business/PostBusiness"
 import { BaseError } from "../errors/BaseError"
 import { CreatePostInputDTO, EditPostInputDTO, GetPostsInput } from "../dtos/PostDTO"
 import { DeletePostInputDTO } from "../dtos/PostDTO"
-
+import { LikesDislikesInputDTO } from "../dtos/LikeDislikeDTO"
 
 
 export class PostController {
@@ -101,5 +98,30 @@ public deletePost = async (req: Request, res: Response) => {
         }
     }
 }
+
+
+public likeOrDislikePost = async (req: Request, res: Response) => {
+    try {
+
+        const input: LikesDislikesInputDTO = {
+            idToLikeDislike: req.params.id,
+            token: req.headers.authorization,
+            like: req.body.like
+        }
+
+        await this.postBusiness.likeOrDislikePost(input)
+
+        res.status(200).end()
+
+    } catch (error) {
+        console.log(error)
+        if (error instanceof BaseError) {
+            res.status(error.statusCode).send(error.message)
+        } else {
+            res.status(500).send("Erro inesperado")
+        }
+    }
+}
+
 
 }

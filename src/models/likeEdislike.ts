@@ -1,4 +1,4 @@
-export class likeEdislike {
+export class LikeEdislike {
     constructor(
         private user_id: string,
         private post_id: string,
