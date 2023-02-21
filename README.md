@@ -29,7 +29,7 @@ O Projeto  Labook é uma rede social com o objetivo de promover a conexão e int
 - Login - Endpoint  onde o usuário faz o login,
 - Create Post - Endpoint que cria uma postagem, 
 - Edit Post - Endpoint onde o usuário pode editar sua postagem,
-- Delete Post - Endpoint que deleta a postagem 
+- Delete Post - Endpoint que deleta a postagem,
 - Like / Dislike Post - Endpoint onde o usuário pode interagir com  outros membros da rede social como curtir e descurtir uma postagem.
  
  # Documentação API
