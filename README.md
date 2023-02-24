@@ -33,4 +33,4 @@ O Projeto  Labook é uma rede social com o objetivo de promover a conexão e int
 - Like / Dislike Post - Endpoint onde o usuário pode interagir com  outros membros da rede social como curtir e descurtir uma postagem.
  
  # Documentação API
-https://documenter.getpostman.com/view/24460801/2s93CHvFGj
+https://documenter.getpostman.com/view/24460801/2s93CPpWvC
